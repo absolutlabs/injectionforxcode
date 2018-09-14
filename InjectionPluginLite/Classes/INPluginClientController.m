@@ -538,7 +538,7 @@ static NSString *kINUnlockCommand = @"INUnlockCommand", *kINSilent = @"INSilent"
     [self openResource:"OSXBundleTemplate/InjectionBundle.xcodeproj"];
 }
 - (IBAction)openiOSTemplate:sender {
-    [self openResource:"iOSBundleTemplate/InjectionBundle.xcodeproj"];
+    [self openResource:".iOSBundleTemplate/InjectionBundle.xcodeproj"];
 }
 - (IBAction)openPatchProject:sender {
     [self openResource:"patchProject.pl"];

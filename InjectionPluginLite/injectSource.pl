@@ -16,6 +16,8 @@ use JSON::PP;
 use common;
 use InjectUnitTests;
 
+use POSIX qw(strftime);
+
 my $compileHighlight = "{\\colortbl;\\red0\\green0\\blue0;\\red160\\green255\\blue160;}\\cb2\\i1";
 my $errorHighlight = "{\\colortbl;\\red0\\green0\\blue0;\\red255\\green255\\blue130;}\\cb2";
 
@@ -57,6 +59,10 @@ sub mtime {
     return (stat $file)[9]||0;
 }
 
+#print "!!\n!!\n!!\n!!\n!!\033[fg237,189,59;⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽\n!!\n";
+
+print "!!\n!!\n!!\n!!\n!!\n";
+
 if ( !$executable ) {
     print "Application is not connected.\n";
     exit 0;
@@ -69,7 +75,7 @@ if ( !$executable ) {
 #
 
 if ( !$bundleProjectSource ) {
-    print "Copying $template into project.\n";
+    # print "Copying $template into project.\n";
 
     0 == system "rm -rf $InjectionBundle; cp -rf \"$FindBin::Bin/$template\" $InjectionBundle && chmod -R og+w $InjectionBundle"
         or error "Could not copy injection bundle.";
@@ -86,7 +92,7 @@ if ( !$bundleProjectSource ) {
 
     $bundleProjectSource = loadFile( $bundleProjectFile );
     if ( -f $mainProjectFile ) {
-        print "Migrating project parameters to bundle..\n";
+        # print "Migrating project parameters to bundle..\n";
         my $mainProjectSource = loadFile( $mainProjectFile );
 
         # has Objective-C++ been used in the main project?
@@ -100,7 +106,7 @@ if ( !$bundleProjectSource ) {
                 ARCHS VALID_ARCHS SDKROOT GCC_ENABLE_OBJC_GC CLANG_ENABLE_OBJC_ARC
                 CLANG_CXX_LANGUAGE_STANDARD CLANG_CXX_LIBRARY)) {
             if ( my ($val) = $mainProjectSource =~ /(\b$parm = [^;]*;)/ ) {
-                print "Inported setting $val\n";
+                # print "Inported setting $val\n";
                 $bundleProjectSource =~ s/\b$parm = [^;]*;/$val/g;
             }
         }
@@ -134,7 +140,7 @@ $config .= " -sdk iphoneos" if $isDevice;
 my $infoFile = "$archDir/identity.txt";
 
 if ( !-f $infoFile ) {
-    print "!!Extracting project parameters into $infoFile ...\n";
+    # print "!!Extracting project parameters into $infoFile ...\n";
     my $cpid = open VARFH, "$xcodebuild -showBuildSettings $config |" or die;
     $SIG{ALRM} = sub { print "!!xcodebuild timeout\n"; kill 9, $cpid; };
     alarm 10;
@@ -160,7 +166,7 @@ $localBundle =~ s@^.*/Build/@$buildRoot/@ if $buildRoot;
 system "rm -rf \"$localBundle/Frameworks/IDEBundleInjection.framework\"";
 
 if ( $localBinary && $bundleProjectSource =~ s/(BUNDLE_LOADER = )([^;]+;)/$1"$localBinary";/g ) {
-    print "Patching bundle project to app path: $localBinary\n";
+    # print "Patching bundle project to app path: $localBinary\n";
 }
 
 ############################################################################
@@ -178,7 +184,7 @@ if ( !$logDir ) {
 
     if ( !-f $memory || $mainProjectChanged ) {
 
-        print "Learning compilations for files in project: $learn\n";
+        # print "Learning compilations for files in project: $learn\n";
 
         my $build = IO::File->new( "rm -rf build; $learn 2>&1 |" );
         my $learn = IO::File->new( "| gzip >$memory" );
@@ -234,7 +240,7 @@ if ( !$learnt ) {
         my $isInterface = $selectedFile =~ /\.(storyboard|xib)$/;
 
         if ( time() - mtime($selectedFile) > 5 ) {
-            print("!!\n!!** File not recently modified. Did you save it? **\n");
+            #print("!!\n!!** File not recently modified. Did you save it? **\n");
         }
 
         local $/ = "\r";
@@ -252,11 +258,11 @@ if ( !$learnt ) {
                     if ( index( $line, $filename ) != -1 &&
                         $line =~ /usr\/bin\/ibtool.+?("$selectedFile"|\Q$escaped\E)/ ) {
                             (my $lout = $line) =~ s/\\/\\\\/g;
-                            print "!!Injection: Compiling $filename (just a sec...)\n";
-                            print "Interface compile: $compileHighlight $lout\n";
+                            # print "!!Injection: Compiling $filename (just a sec...)\n";
+                            # print "Interface compile: $compileHighlight $lout\n";
                             0 == system "time $line 2>&1"
                             or die "Interface compile failed";
-                            print "!!Injection: Compile completes\n";
+                            # print "!!Injection: Compile completes\n";
                             ($nibCompiled) = $line =~ /-compilation-directory (.*?)\/\w+.lproj/;
                             $flags |= $INJECTION_STORYBOARD;
                             last FOUND;
@@ -427,12 +433,12 @@ if ( $learnt ) {
 
     $learnt =~ s/([()])/\\$1/g;
     rtfEscape( my $lout = $learnt );
-    print "Learnt compile: $compileHighlight $lout\n";
+    #print "Learnt compile: $compileHighlight $lout\n";
 
-    print "!!Compiling $selectedFile\n";
+    #print "!!Compiling $selectedFile\n";
     foreach my $out (`time $learnt 2>&1`) {
-        print "!!$out";
-        print rtfEscape( $out );
+        #   print "!!$out";
+        #   print rtfEscape( $out );
     }
     error "Learnt compile failed" if $?;
 
@@ -481,7 +487,7 @@ saveFile( $bundleProjectFile, $bundleProjectSource );
 # until next time the bundle project file changes.
 #
 
-print "\nBuilding $InjectionBundle/InjectionBundle.xcodeproj\n";
+#print "\nBuilding $InjectionBundle/InjectionBundle.xcodeproj\n";
 
 my $builtfile = "$archDir/built.txt";
 unlink $builtfile if !$learnt || $flags & $INJECTION_FLAGCHANGE;
@@ -498,7 +504,7 @@ my ($recording, $recorded);
 if ( mtime( $bundleProjectFile ) > mtime( $buildScript ) ) {
     $recording = IO::File->new( "> $buildScript" )
         or die "Could not open '$buildScript' as: $!";
-    print "!!... First time learning of project, one second ...\n";
+    #    print "!!... First time learning of project, one second ...\n";
 }
 else {
     # used recorded commands to avoid overhead of xcodebuild
@@ -584,7 +590,7 @@ if ( $recording ) {
 # BundleInjection.h code in the application.
 #
 
-print "Renaming bundle so it reloads..\n";
+#print "Renaming bundle so it reloads..\n";
 
 my ($bundleRoot) = $bundlePath =~ m@^\"?(.*)/([^/]*)$@;
 my $newBundle = $isIOS ? "$bundleRoot/$productName.bundle" : "$appPackage/$productName.bundle";
@@ -596,7 +602,7 @@ print "$command\n";
 $bundlePath = $newBundle;
 
 if ( $flags & $INJECTION_STORYBOARD ) {
-    print "Copying nibs $nibCompiled -> $bundlePath\n\n";
+    #print "Copying nibs $nibCompiled -> $bundlePath\n\n";
     open NIBS, "cd '$nibCompiled'; find . |";
     while ( my $nib = <NIBS> ) {
         chomp $nib;
@@ -621,7 +627,7 @@ foreach my $resourceFullpath (@allResources) {
 
 $identity = "-" if !$isDevice;
 if ( $identity ) {
-    print "Codesigning with identity '$identity' for iOS device\n";
+    # print "Codesigning with identity '$identity' for iOS device\n";
     0 == system "codesign --force -s '$identity' \"$bundlePath\""
         or error "Could not codesign as '$identity': $bundlePath";
 }
@@ -631,8 +637,8 @@ if ( $isDevice ) {
     $bundlePath = copyToDevice( $bundlePath, "$deviceRoot/tmp/$productName.bundle" );
 }
 
-print "Loading Bundle...\n";
-print "!$bundlePath\n";
+#print "Loading Bundle...\n";
+ print "!$bundlePath\n";
 
 ############################################################################
 #
@@ -645,4 +651,17 @@ my $injectionCountFileName = "${InjectionBundle}/injectionCount.txt";
 system "touch $injectionCountFileName";
 my $injectionCount = (loadFile( $injectionCountFileName )||0) + 1;
 saveFile( $injectionCountFileName, $injectionCount );
-print "!!$injectionCount injections performed so far.\n";
+#print "!!\n!!\n!!\n!!\n!!\033[;\033[bg237,189,59; \033[fg0,0,0;Injection done [$injectionCount]\n\033[; !!\033[;!!\n";
+#print "!!\n!!\n!!\n"
+
+#($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
+
+my $datestring = strftime "%H:%M", localtime;
+
+print "!!\n!!\n!!\n!!\n!!\033[;\033[fg237,189,59; [ Injection done  -  $datestring ]\033[;\n!!\n!!\033[fg237,189,59;⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽\033[;\n!!\n!!\n!!\n";
+
+#print "!!\n!!\n!!\n!!\n!!\033[;\033[bg237,189,59;Injection done ($injectionCount)\033[;\n!!\n!!\033[bg237,189,59;⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽\033[;\033[;\n!!\n!!\n";
+
+
+
+

@@ -268,14 +268,14 @@ static NSMutableArray *liveInstances;
     static int setup;
     if ( !setup++ ) {
         // add bsweep method to SwiftObject class!
-        Class swiftRoot = objc_getClass( "SwiftObject" );
-        SEL methodSEL = @selector(bsweep);
-        Method method = class_getInstanceMethod([NSObject class], methodSEL);
-        if ( !class_addMethod( swiftRoot, methodSEL,
-                              method_getImplementation( method ),
-                              method_getTypeEncoding( method ) ) )
-            NSLog( @"BundleSweeper: Could not add SwiftObject method: %s %p %s", sel_getName(methodSEL),
-                  (void *)method_getImplementation( method ), method_getTypeEncoding( method ) );
+//        Class swiftRoot = objc_getClass( "SwiftObject" );
+//        SEL methodSEL = @selector(bsweep);
+//        Method method = class_getInstanceMethod([NSObject class], methodSEL);
+//        if ( !class_addMethod( swiftRoot, methodSEL,
+//                              method_getImplementation( method ),
+//                              method_getTypeEncoding( method ) ) )
+//            NSLog( @"BundleSweeper: Could not add SwiftObject method: %s %p %s", sel_getName(methodSEL),
+//                  (void *)method_getImplementation( method ), method_getTypeEncoding( method ) );
     }
 
     Class bundleInjection = objc_getClass("BundleInjection");
@@ -312,7 +312,7 @@ static NSMutableArray *liveInstances;
                 if ( strncmp( info.dli_fname, userClass, sizeof userClass-1 ) == 0 &&
                     strstr( info.dli_fname, "/InjectionBundle" ) == 0 ) {
                     id (*imp)( Class, SEL ) = (id (*)( Class, SEL ))method_getImplementation( m );
-                    NSLog( @"BundleSweeper: +[%@ sharedInstance] == %p()", classes[i], (void *)imp );
+                    //NSLog( @"BundleSweeper: +[%@ sharedInstance] == %p()", classes[i], (void *)imp );
                     id shared = imp( classes[i], @selector(sharedInstance) );
                     if ( shared )
                         [sharedInstances addObject:shared];

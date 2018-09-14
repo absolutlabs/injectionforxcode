@@ -16,7 +16,6 @@
 		BB3EFFB116A4B815001F0065 /* INPluginClientController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB3EFFAD16A4B815001F0065 /* INPluginClientController.m */; };
 		BB3EFFB216A4B815001F0065 /* INPluginMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB3EFFAF16A4B815001F0065 /* INPluginMenuController.m */; };
 		BB3EFFBA16A53307001F0065 /* injection.png in Resources */ = {isa = PBXBuildFile; fileRef = BB3EFFB816A53307001F0065 /* injection.png */; };
-		BB3EFFCF16A535C6001F0065 /* iOSBundleTemplate in Resources */ = {isa = PBXBuildFile; fileRef = BB3EFFCD16A535C6001F0065 /* iOSBundleTemplate */; };
 		BB3EFFD016A535C6001F0065 /* OSXBundleTemplate in Resources */ = {isa = PBXBuildFile; fileRef = BB3EFFCE16A535C6001F0065 /* OSXBundleTemplate */; };
 		BB3EFFD716A541A6001F0065 /* INPluginMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB3EFFB016A4B815001F0065 /* INPluginMenuController.xib */; };
 		BB3EFFDA16A541DB001F0065 /* BundleInterface.h in Resources */ = {isa = PBXBuildFile; fileRef = BB3EFFD916A541B8001F0065 /* BundleInterface.h */; };
@@ -33,6 +32,7 @@
 		BBEADCF616B12EAE003EF366 /* projectBuilt.pl in Resources */ = {isa = PBXBuildFile; fileRef = BBEADCF516B12EAE003EF366 /* projectBuilt.pl */; };
 		BBEC640216A756F700DC5E08 /* patchProject.pl in Resources */ = {isa = PBXBuildFile; fileRef = BBEC640016A756F600DC5E08 /* patchProject.pl */; };
 		BBEC640316A756F700DC5E08 /* revertProject.pl in Resources */ = {isa = PBXBuildFile; fileRef = BBEC640116A756F600DC5E08 /* revertProject.pl */; };
+		BF19DA1C214C063F0081FCE0 /* .iOSBundleTemplate in Resources */ = {isa = PBXBuildFile; fileRef = BF19DA19214C063F0081FCE0 /* .iOSBundleTemplate */; };
 		DA1B5D020E64686800921439 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 089C1672FE841209C02AAC07 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,7 +84,6 @@
 		BB3EFFAF16A4B815001F0065 /* INPluginMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPluginMenuController.m; sourceTree = "<group>"; };
 		BB3EFFB016A4B815001F0065 /* INPluginMenuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = INPluginMenuController.xib; sourceTree = "<group>"; };
 		BB3EFFB816A53307001F0065 /* injection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = injection.png; sourceTree = "<group>"; };
-		BB3EFFCD16A535C6001F0065 /* iOSBundleTemplate */ = {isa = PBXFileReference; lastKnownFileType = folder; path = iOSBundleTemplate; sourceTree = "<group>"; };
 		BB3EFFCE16A535C6001F0065 /* OSXBundleTemplate */ = {isa = PBXFileReference; lastKnownFileType = folder; path = OSXBundleTemplate; sourceTree = "<group>"; };
 		BB3EFFD816A541B8001F0065 /* BundleInjection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BundleInjection.h; sourceTree = "<group>"; };
 		BB3EFFD916A541B8001F0065 /* BundleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BundleInterface.h; sourceTree = "<group>"; };
@@ -104,6 +103,7 @@
 		BBEC640116A756F600DC5E08 /* revertProject.pl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.perl; path = revertProject.pl; sourceTree = "<group>"; };
 		BBF225B81B20D2CA00E1B001 /* BundleSweeper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BundleSweeper.h; sourceTree = "<group>"; };
 		BBF225B91B20D2CA00E1B001 /* IvarAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IvarAccess.h; sourceTree = "<group>"; };
+		BF19DA19214C063F0081FCE0 /* .iOSBundleTemplate */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .iOSBundleTemplate; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +130,7 @@
 				7F411B0C15FABAC6002F77B6 /* Classes */,
 				089C167CFE841241C02AAC07 /* Resources */,
 				BB26EB8D160DE85B00A62DFC /* Scripts */,
-				BB3EFFCD16A535C6001F0065 /* iOSBundleTemplate */,
+				BF19DA19214C063F0081FCE0 /* .iOSBundleTemplate */,
 				BB3EFFCE16A535C6001F0065 /* OSXBundleTemplate */,
 				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
@@ -327,11 +327,11 @@
 				BB2923FE1B45B96700F52DEA /* BundleSweeper.h in Resources */,
 				BB2924001B45B97800F52DEA /* IvarAccess.h in Resources */,
 				BB3EFFBA16A53307001F0065 /* injection.png in Resources */,
-				BB3EFFCF16A535C6001F0065 /* iOSBundleTemplate in Resources */,
 				BB3EFFD016A535C6001F0065 /* OSXBundleTemplate in Resources */,
 				BB5DEF9716A55D2A00E97DD4 /* common.pm in Resources */,
 				10225D4F1F77E209008C907D /* InjectUnitTests.pm in Resources */,
 				BBEC640216A756F700DC5E08 /* patchProject.pl in Resources */,
+				BF19DA1C214C063F0081FCE0 /* .iOSBundleTemplate in Resources */,
 				BBCDA04819FD229F009AC8C5 /* evalCode.pl in Resources */,
 				BBEC640316A756F700DC5E08 /* revertProject.pl in Resources */,
 				BB5DEF9C16A55E1800E97DD4 /* injectSource.pl in Resources */,
@@ -359,7 +359,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd InjectionLoader && \"$DEVELOPER_BIN_DIR\"/xcodebuild -sdk iphonesimulator -config Debug -arch x86_64 -arch i386 && cd - &&\nchmod +x \"$INSTALL_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"/*.pl &&\ncp -rf Classes/Xtrace.* InjectionLoader/build/*-iphonesimulator/InjectionLoader.bundle \"$INSTALL_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\n/usr/bin/codesign --force --sign \"-\" --timestamp=none \"$INSTALL_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"/InjectionLoader.bundle &&\n\nSYMROOT=/tmp\ncd XprobeSwift && rm -rf build &&\n\n\"$DEVELOPER_BIN_DIR\"/xcodebuild SYMROOT=$SYMROOT -sdk iphonesimulator -arch x86_64 -arch i386 -config Debug &&\ncp -rf $SYMROOT/Debug-iphonesimulator/XprobeSwift.loader \"$INSTALL_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"/InjectionLoader.bundle";
+			shellScript = "echo \" \"\necho \" \"\necho \" \"\necho \"$INSTALL_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\necho \" \"\necho \" \"\necho \" \"\ncd InjectionLoader && \"$DEVELOPER_BIN_DIR\"/xcodebuild -sdk iphonesimulator -config Debug -arch x86_64 -arch i386 && cd - &&\nchmod +x \"$INSTALL_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"/*.pl &&\ncp -rf Classes/Xtrace.* InjectionLoader/build/*-iphonesimulator/InjectionLoader.bundle \"$INSTALL_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\n/usr/bin/codesign --force --sign \"-\" --timestamp=none \"$INSTALL_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"/InjectionLoader.bundle &&\n\nSYMROOT=/tmp\ncd XprobeSwift && rm -rf build &&\n\n\"$DEVELOPER_BIN_DIR\"/xcodebuild SYMROOT=$SYMROOT -sdk iphonesimulator -arch x86_64 -arch i386 -config Debug &&\ncp -rf $SYMROOT/Debug-iphonesimulator/XprobeSwift.loader \"$INSTALL_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"/InjectionLoader.bundle";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

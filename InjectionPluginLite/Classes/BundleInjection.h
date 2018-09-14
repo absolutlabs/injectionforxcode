@@ -66,11 +66,11 @@ static const char *_inIPAddresses[100] = {INJECTOR_IPADDRS};
 #define INJECTION_LEGACY32BITOSX
 #endif
 
-#ifdef DEBUG
-#define INLog( _fmt... ) printf( "> Injection: %s\n", [NSString stringWithFormat:_fmt].UTF8String )
-#else
-#define INLog while(0) NSLog
-#endif
+//#ifdef DEBUG
+#define INLog( _fmt... ) {} // printf( "> Injection: %s\n", [NSString stringWithFormat:_fmt].UTF8String )
+//#else
+//#define INLog while(0) NSLog
+//#endif
 
 struct _in_header { int pathLength, dataLength; };
 

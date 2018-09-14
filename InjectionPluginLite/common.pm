@@ -46,7 +46,7 @@ $isIOS = $isDevice || $isSimulator || $isAndroid;
 $flags &= ~$INJECTION_NOTSILENT if $isAppCode;
 
 ($template, $header, $appClass) = $isIOS ?
-    ("iOSBundleTemplate", "UIKit/UIKit.h", "UIApplication") :
+    (".iOSBundleTemplate", "UIKit/UIKit.h", "UIApplication") :
     ("OSXBundleTemplate", "Cocoa/Cocoa.h", "NSApplication");
 
 ($InjectionBundle = $template) =~ s/BundleTemplate/InjectionProject/;
@@ -97,11 +97,11 @@ sub saveFile {
             $fh->print( $data );
             $fh->close();
             if ( $path !~ /\.plist$/ ) {
-                print "Modified $link ...\n";
+                # print "Modified $link ...\n";
                 if ( !$isAppCode && 0 ) {
                     (my $diff = `/usr/bin/diff -C 5 \"$path.save\" \"$path\"`) =~ s/([\{\}\\])/\\$1/g;
                     $diff =~ s/\n/\\line/g;
-                    print "{\\colortbl;\\red0\\green0\\blue0;\\red245\\green222\\blue179;}\\cb2$diff\n";
+                    #   print "{\\colortbl;\\red0\\green0\\blue0;\\red245\\green222\\blue179;}\\cb2$diff\n";
                 }
             }
             return 1;
@@ -128,11 +128,11 @@ sub unlock {
     my ($file) = @_;
     return if !-f $file || -w $file;
 
-    print "Unlocking $file\n";
+    # print "Unlocking $file\n";
     $file =~ s@^./@@;
     $file = "$projRoot$file" if $file !~ m@^/@;
 
-    print "Executing: $unlockCommand\n";
+    # print "Executing: $unlockCommand\n";
     my $command = sprintf $unlockCommand, map $file, 0..10;
     0 == system $command
         or print "${RED}Could not unlock using command: $command\n";
@@ -163,9 +163,9 @@ sub unique {
 sub copyToDevice {
     my ($from,$to,$pattern) = @_;
 
-    print "Uploading '$from' to device...\n";
-    print "<$from\n";
-    print "!>$to\n";
+    # print "Uploading '$from' to device...\n";
+    # print "<$from\n";
+    # print "!>$to\n";
 
     my $files = IO::File->new( "cd \"$from\" && find . -print |" )
         or error "Could not find: $from";
